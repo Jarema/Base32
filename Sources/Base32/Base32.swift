@@ -82,7 +82,6 @@ extension String {
         }
     }
     public var base32EncodedStringNoPadding: String {
-        print("encinding \(self) with padding: false")
         return utf8CString.withUnsafeBufferPointer {
             base32encode($0.baseAddress!, $0.count - 1, alphabetEncodeTable, padding: false)
         }
@@ -158,7 +157,6 @@ let alphabetEncodeTable: [Int8] = ["A","B","C","D","E","F","G","H","I","J","K","
 let extendedHexAlphabetEncodeTable: [Int8] = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V"].map { (c: UnicodeScalar) -> Int8 in Int8(c.value) }
 
 private func base32encode(_ data: UnsafeRawPointer, _ length: Int, _ table: [Int8], padding: Bool = true) -> String {
-    print("padding? \(padding)")
     if length == 0 {
         return ""
     }
@@ -236,7 +234,7 @@ private func base32encode(_ data: UnsafeRawPointer, _ length: Int, _ table: [Int
             encoded[8] = 0
             break
         }
-    } 
+    }
     
     // Set the null terminator at the correct position
     resultBuffer[encodedLength] = 0
