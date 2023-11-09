@@ -166,6 +166,7 @@ private func base32encode(_ data: UnsafeRawPointer, _ length: Int, _ table: [Int
     
     let resultBufferSize = Int(ceil(Double(length) / 5)) * 8 + 1    // need null termination
     let resultBuffer = UnsafeMutablePointer<Int8>.allocate(capacity: resultBufferSize)
+    resultBuffer.initialize(repeating: 0, count: resultBufferSize)
     var encoded = resultBuffer
     
     // encode regular blocks
